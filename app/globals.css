@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --c-green: #4ade80;
+  --c-amber: #fbbf24;
+  --c-red: #f87171;
+  --c-phosphor: #5eead4;
+  --bg: #050608;
+}
+
+@layer base {
+  * {
+    @apply border-ink-700;
+  }
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink-950 text-zinc-200 font-sans antialiased;
+    background-image: radial-gradient(120% 80% at 50% -20%, rgba(94, 234, 212, 0.07), transparent 55%);
+    background-attachment: fixed;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: rgba(94, 234, 212, 0.25);
+    color: #fff;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ink-600 rounded-full;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-ink-500;
+  }
+}
+
+@layer components {
+  /* Terminal panel — the core surface primitive */
+  .panel {
+    @apply relative rounded-xl border border-ink-700/80 bg-ink-900/60 backdrop-blur-sm;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
+  }
+  .panel-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  .mono-label {
+    @apply font-mono text-2xs uppercase tracking-[0.18em] text-muted;
+  }
+
+  .terminal-dot {
+    @apply h-2.5 w-2.5 rounded-full;
+  }
+
+  .hairline {
+    @apply border-t border-ink-700/70;
+  }
+
+  /* Animated scanline overlay for the "intelligent" loading state */
+  .scanline::after {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-24 opacity-40;
+    background: linear-gradient(to bottom, transparent, rgba(94, 234, 212, 0.12), transparent);
+    animation: scan 3s linear infinite;
+  }
+
+  .glow-border {
+    @apply border border-phosphor/30;
+    box-shadow: 0 0 0 1px rgba(94, 234, 212, 0.12), 0 0 40px -12px rgba(94, 234, 212, 0.35);
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-md bg-ink-800;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .ticker-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(900%);
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .panel {
+    border-color: #ddd !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
