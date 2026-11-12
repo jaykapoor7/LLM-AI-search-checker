@@ -32,7 +32,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto max-w-7xl px-5">
       {/* HERO */}
-      <section className="grid gap-12 pb-16 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-24">
+      <section className="grid grid-cols-1 gap-12 pb-16 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-24">
         <div>
           <Badge tone="phosphor" className="mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-phosphor animate-pulse" />
@@ -135,7 +135,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className="border-t border-ink-700/60 py-24">
         <Reveal>
-          <Panel grid className="relative overflow-hidden px-8 py-16 text-center">
+          <Panel grid className="relative overflow-hidden px-5 py-16 text-center sm:px-8">
             <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
             <div className="relative mx-auto max-w-xl">
               <h2 className="text-balance text-4xl font-semibold tracking-tight text-zinc-50">

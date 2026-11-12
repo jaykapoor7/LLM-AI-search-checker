@@ -47,7 +47,7 @@ export function ReportHeader({ report }: { report: AnalysisReport }) {
         <p className="mt-2 max-w-xl text-muted">
           How <span className="text-zinc-200">{report.domain}</span> appears to AI systems that
           discover, understand, and recommend websites.{" "}
-          <span className="text-zinc-300">Reads like {report.archetype.toLowerCase()}.</span>
+          <span className="text-zinc-300">Reads like: {report.archetype.toLowerCase()}.</span>
         </p>
 
         <div className="no-print mt-6 flex flex-wrap gap-2">
@@ -80,7 +80,7 @@ export function ReportHeader({ report }: { report: AnalysisReport }) {
       </div>
 
       <div className="flex justify-center md:pl-6">
-        <RadialGauge value={report.overall} size={200} label="Overall visibility" />
+        <RadialGauge value={report.overall} size={200} label="Overall" />
       </div>
     </div>
   );
