@@ -20,6 +20,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  // Makes the generated og:image / twitter:image URLs absolute.
+  metadataBase: new URL("https://llm-ai-search-checker.vercel.app"),
   title: "LLM Visibility Lab: see what AI sees",
   description:
     "You optimize for Google. But can ChatGPT, Claude, and Perplexity discover, understand, cite, and recommend your website? LLM Visibility Lab analyzes your site and simulates AI retrieval.",
