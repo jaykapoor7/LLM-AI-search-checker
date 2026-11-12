@@ -4,12 +4,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+// Profile and Settings drop out of the bar below the `sm` breakpoint so the
+// header fits a 390px phone; the home page footer links to both.
 const NAV = [
-  { href: "/analyze", label: "Analyze" },
-  { href: "/compare", label: "Compare" },
-  { href: "/profile/demo", label: "Profile" },
-  { href: "/settings", label: "Settings" },
+  { href: "/analyze", label: "Analyze", mobile: true },
+  { href: "/compare", label: "Compare", mobile: true },
+  { href: "/profile/demo", label: "Profile", mobile: false },
+  { href: "/settings", label: "Settings", mobile: false },
 ];
+
+const REPO_URL = "https://github.com/jaykapoor7/LLM-AI-search-checker";
 
 export function TopBar() {
   const pathname = usePathname();
@@ -35,6 +39,7 @@ export function TopBar() {
                 href={item.href}
                 className={cn(
                   "rounded-md px-3 py-1.5 font-mono text-2xs uppercase tracking-wider transition",
+                  !item.mobile && "hidden sm:block",
                   active ? "bg-ink-800 text-phosphor" : "text-muted hover:text-zinc-200"
                 )}
               >
@@ -43,12 +48,12 @@ export function TopBar() {
             );
           })}
           <a
-            href="https://github.com"
+            href={REPO_URL}
             target="_blank"
             rel="noreferrer"
             className="ml-2 hidden rounded-md border border-ink-700 px-3 py-1.5 font-mono text-2xs uppercase tracking-wider text-zinc-300 transition hover:border-phosphor/40 hover:text-phosphor sm:block"
           >
-            ★ Star
+            GitHub
           </a>
         </nav>
       </div>

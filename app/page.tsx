@@ -158,6 +158,7 @@ export default function HomePage() {
           <div className="flex gap-4 font-mono text-2xs text-muted">
             <Link href="/analyze" className="hover:text-phosphor">Analyze</Link>
             <Link href="/compare" className="hover:text-phosphor">Compare</Link>
+            <Link href="/profile/demo" className="hover:text-phosphor">Profile</Link>
             <Link href="/settings" className="hover:text-phosphor">Settings</Link>
           </div>
         </div>
