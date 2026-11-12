@@ -60,7 +60,7 @@ export function simulatePrompts(
           ? "Clear identity signals let a model answer this confidently and correctly."
           : v >= 45
           ? "A model can attempt an answer but will hedge on specifics it can't verify."
-          : "Too little grounding — a model would likely say it doesn't have enough information.",
+          : "Too little grounding. A model would likely say it doesn't have enough information.",
       simulatedAnswer:
         v >= 45
           ? `${brand}${person ? `, by ${person},` : ""} appears to be focused on ${topic.toLowerCase()}. ${c.metaDescription ? `"${truncate(c.metaDescription, 90)}"` : ""}`
@@ -80,7 +80,7 @@ export function simulatePrompts(
       reasoning:
         audienceHits >= 2
           ? "Explicit audience language lets a model match you to the right user."
-          : "No clear audience framing — the model can't tell who you're for.",
+          : "No clear audience framing, so the model can't tell who you're for.",
       simulatedAnswer:
         v >= 45
           ? `It seems aimed at ${audienceLabel(c)} working in ${topic.toLowerCase()}.`
@@ -102,7 +102,7 @@ export function simulatePrompts(
           ? "Strong category signals + comparison content put you in the consideration set."
           : v >= 45
           ? "You might appear, but without comparison pages you're easy to overlook."
-          : "Almost no chance of surfacing — no category anchor or comparison content.",
+          : "Almost no chance of surfacing: no category anchor or comparison content.",
       simulatedAnswer:
         v >= 55
           ? `${brand} could be mentioned among options for ${topic.toLowerCase()}, alongside more established names.`
@@ -127,7 +127,7 @@ export function simulatePrompts(
       simulatedAnswer:
         v >= 55
           ? `Based on available signals, ${brand} looks credible for ${topic.toLowerCase()}, though I'd verify recency.`
-          : `I can't responsibly recommend ${brand} — there isn't enough verifiable information.`,
+          : `I can't responsibly recommend ${brand}. There isn't enough verifiable information.`,
     });
   }
 
@@ -138,7 +138,7 @@ export function simulatePrompts(
       score >= 70
         ? "You surface confidently across the prompt shapes that drive AI recommendations."
         : score >= 45
-        ? "You appear inconsistently — present for direct lookups, invisible for discovery prompts."
+        ? "You appear inconsistently: present for direct lookups, invisible for discovery prompts."
         : "You're effectively invisible in AI conversations. Discovery prompts never reach you.",
     results,
   };

@@ -59,6 +59,10 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(8px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "type-in": {
+          "0%": { opacity: "0", transform: "translateX(-6px)" },
+          "100%": { opacity: "1", transform: "translateX(0)" },
+        },
         "scan": {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100%)" },
@@ -74,6 +78,7 @@ const config: Config = {
       },
       animation: {
         "fade-up": "fade-up 0.5s cubic-bezier(0.16,1,0.3,1) forwards",
+        "type-in": "type-in 0.25s ease-out forwards",
         scan: "scan 3s linear infinite",
         blink: "blink 1.1s step-end infinite",
         "pulse-ring": "pulse-ring 2s cubic-bezier(0.16,1,0.3,1) infinite",

@@ -1,7 +1,7 @@
 import type { CrawlResult, EntityGraph } from "../types";
 
 // Synthesizes the "Your website reads like…" narrative. This is rule-based
-// pattern matching over the extracted signals — deterministic and explainable,
+// pattern matching over the extracted signals: deterministic and explainable,
 // not a model call. It classifies the site into a recognizable archetype.
 
 interface SummaryInput {
@@ -48,12 +48,12 @@ export function buildAiSummary(input: SummaryInput): {
   if (topics.length >= 2) strengths.push(`Coherent topical focus around ${topics.slice(0, 2).join(" & ")}.`);
   if (!strengths.length) strengths.push("A clean starting point to build retrievability on.");
 
-  if (!crawl.jsonLd.length) risks.push("No structured data — AI must infer everything from prose.");
-  if (!cov.category) risks.push("No declared category — invisible to 'best of' prompts.");
-  if (citationScore < 50) risks.push("Low citation probability — unlikely to be referenced by name.");
-  if (depth < 400) risks.push("Thin content — little for a model to retrieve or quote.");
-  if (!cov.expertise) risks.push("Expertise isn't established — claims aren't attributable.");
-  if (!risks.length) risks.push("Mostly polish remaining — strengthen comparison & freshness signals.");
+  if (!crawl.jsonLd.length) risks.push("No structured data, so AI must infer everything from prose.");
+  if (!cov.category) risks.push("No declared category, so you're invisible to 'best of' prompts.");
+  if (citationScore < 50) risks.push("Low citation probability: unlikely to be referenced by name.");
+  if (depth < 400) risks.push("Thin content: little for a model to retrieve or quote.");
+  if (!cov.expertise) risks.push("Expertise isn't established, so claims aren't attributable.");
+  if (!risks.length) risks.push("Mostly polish remaining: strengthen comparison & freshness signals.");
 
   const narrative = buildNarrative(readsLike, { discoverability, entityScore, citationScore, cov, depth });
 
@@ -76,13 +76,13 @@ function classify(s: {
   if (s.hasPerson && strong)
     return { archetype: "Research-heavy founder site", readsLike: "a research-heavy founder site with real intellectual gravity" };
   if (s.hasPerson && !s.hasProduct && s.entityScore >= 45)
-    return { archetype: "Personal portfolio", readsLike: "a strong operator portfolio — clear person, lighter on category" };
+    return { archetype: "Personal portfolio", readsLike: "a strong operator portfolio: clear person, lighter on category" };
 
   // Product/company-led and well-grounded → credible product site.
   if (s.hasProduct && s.hasCompany && strong)
     return { archetype: "Established product site", readsLike: "a credible product site that AI can confidently place and describe" };
   if (s.hasCompany && s.discoverability >= 75 && s.entityScore >= 55)
-    return { archetype: "Polished product site", readsLike: "a polished product site — technically clean, with room to deepen its story" };
+    return { archetype: "Polished product site", readsLike: "a polished product site: technically clean, with room to deepen its story" };
 
   // Topical/editorial.
   if (s.topics.length >= 2 && s.depth >= 500 && s.citationScore >= 50)
@@ -92,7 +92,7 @@ function classify(s: {
   if (s.discoverability < 50)
     return { archetype: "Under-optimized page", readsLike: "an early-stage page that AI systems can barely parse yet" };
   if (s.hasProduct && s.entityScore < 45)
-    return { archetype: "Generic startup landing page", readsLike: "a generic startup landing page — lots of promise, little for AI to grab onto" };
+    return { archetype: "Generic startup landing page", readsLike: "a generic startup landing page: lots of promise, little for AI to grab onto" };
   return { archetype: "Emerging site", readsLike: "an emerging site with the bones of authority but unfinished signals" };
 }
 
@@ -111,7 +111,7 @@ function buildNarrative(
     ? "Declaring your category is the fastest way to start appearing in discovery answers."
     : ctx.depth < 500
     ? "Adding citable depth is what will move you from 'mentioned' to 'recommended'."
-    : "Structured data and comparison content are the remaining unlocks.";
+    : "Structured data and comparison content are the remaining gaps.";
 
   return `To an AI, your site reads like ${readsLike}. ${verdict} ${lever}`;
 }

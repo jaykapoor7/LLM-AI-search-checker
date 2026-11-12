@@ -47,7 +47,7 @@ function SectionShell({
   );
 }
 
-// ── Section 1 — Discoverability ──────────────────────────────────────────────
+// ── Section 1: Discoverability ──────────────────────────────────────────────
 export function DiscoverabilitySection({ report }: { report: AnalysisReport }) {
   const d = report.discoverability;
   return (
@@ -58,7 +58,7 @@ export function DiscoverabilitySection({ report }: { report: AnalysisReport }) {
           <p className="mt-2 max-w-[220px] text-center text-sm leading-snug text-muted">{d.summary}</p>
         </div>
         <div className="min-w-0">
-          <span className="mono-label">signal breakdown — {d.signals.length} checks</span>
+          <span className="mono-label">signal breakdown · {d.signals.length} checks</span>
           <div className="mt-1">
             <SignalList signals={d.signals} />
           </div>
@@ -68,7 +68,7 @@ export function DiscoverabilitySection({ report }: { report: AnalysisReport }) {
   );
 }
 
-// ── Section 2 — Entity Strength ──────────────────────────────────────────────
+// ── Section 2: Entity Strength ──────────────────────────────────────────────
 export function EntitySection({ report }: { report: AnalysisReport }) {
   const e = report.entityStrength;
   const cov = e.graph.coverage;
@@ -112,7 +112,7 @@ export function EntitySection({ report }: { report: AnalysisReport }) {
         </div>
 
         <div className="min-w-0">
-          <span className="mono-label">knowledge graph — {e.graph.entities.length} entities</span>
+          <span className="mono-label">knowledge graph · {e.graph.entities.length} entities</span>
           <div className="mt-2 rounded-lg border border-ink-700/60 bg-ink-950/40">
             <EntityGraph graph={e.graph} />
           </div>
@@ -122,7 +122,7 @@ export function EntitySection({ report }: { report: AnalysisReport }) {
   );
 }
 
-// ── Section 3 — Citation Probability ─────────────────────────────────────────
+// ── Section 3: Citation Probability ─────────────────────────────────────────
 const LEVELS: Confidence[] = ["Low", "Medium", "High"];
 export function CitationSection({ report }: { report: AnalysisReport }) {
   const c = report.citation;
@@ -173,7 +173,7 @@ export function CitationSection({ report }: { report: AnalysisReport }) {
   );
 }
 
-// ── Section 4 — Prompt Visibility ────────────────────────────────────────────
+// ── Section 4: Prompt Visibility ────────────────────────────────────────────
 export function PromptSection({ report }: { report: AnalysisReport }) {
   const p = report.promptVisibility;
   return (
@@ -222,7 +222,7 @@ export function PromptSection({ report }: { report: AnalysisReport }) {
   );
 }
 
-// ── Section 5 — GEO Recommendations ──────────────────────────────────────────
+// ── Section 5: GEO Recommendations ──────────────────────────────────────────
 const IMPACT_TONE = { High: "green", Medium: "amber", Low: "neutral" } as const;
 const DIFF_TONE = { Easy: "green", Moderate: "amber", Hard: "red" } as const;
 const PRIO_TONE = { P0: "red", P1: "amber", P2: "blue" } as const;
@@ -272,7 +272,7 @@ export function RecommendationsSection({ report }: { report: AnalysisReport }) {
   );
 }
 
-// ── Section 6 — AI Summary ───────────────────────────────────────────────────
+// ── Section 6: AI Summary ───────────────────────────────────────────────────
 export function AiSummarySection({ report }: { report: AnalysisReport }) {
   const s = report.aiSummary;
   return (

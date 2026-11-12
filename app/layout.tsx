@@ -1,16 +1,34 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { TopBar } from "@/components/shell/TopBar";
 import { GrainOverlay } from "@/components/shell/GrainOverlay";
 
+// Self-hosted at build time by next/font. The CSS variables feed the
+// `font-sans` / `font-mono` families in tailwind.config.ts.
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "LLM Visibility Lab — See what AI sees",
+  // Makes the generated og:image / twitter:image URLs absolute.
+  metadataBase: new URL("https://llm-ai-search-checker.vercel.app"),
+  title: "LLM Visibility Lab: see what AI sees",
   description:
     "You optimize for Google. But can ChatGPT, Claude, and Perplexity discover, understand, cite, and recommend your website? LLM Visibility Lab analyzes your site and simulates AI retrieval.",
   keywords: ["GEO", "generative engine optimization", "AI SEO", "LLM visibility", "AI citations", "entity SEO"],
   authors: [{ name: "LLM Visibility Lab" }],
   openGraph: {
-    title: "LLM Visibility Lab — See what AI sees",
+    title: "LLM Visibility Lab: see what AI sees",
     description: "Analyze whether AI systems can discover, understand, cite, and recommend your website.",
     type: "website",
   },
@@ -25,16 +43,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-          rel="stylesheet"
-        />
-        <style>{`:root{--font-sans:'Inter';--font-mono:'JetBrains Mono';}`}</style>
-      </head>
+    <html lang="en" className={`dark ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
         <GrainOverlay />
         <TopBar />

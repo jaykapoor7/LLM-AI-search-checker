@@ -20,7 +20,7 @@ export function RecentRuns() {
   if (history.length === 0) {
     return (
       <div className="rounded-xl border border-dashed border-ink-700 px-5 py-8 text-center">
-        <p className="font-mono text-2xs text-muted">no analyses yet — your history will appear here</p>
+        <p className="font-mono text-2xs text-muted">no analyses yet. Your history will appear here.</p>
       </div>
     );
   }

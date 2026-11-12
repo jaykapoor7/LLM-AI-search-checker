@@ -18,21 +18,21 @@ const SECTIONS = [
   { icon: Quote, name: "Citation Probability", desc: "How likely is an AI to reference you by name?", tone: "blue" as const },
   { icon: MessageSquareText, name: "Prompt Visibility", desc: "Do you surface for 'best X' and 'alternatives' prompts?", tone: "green" as const },
   { icon: ListChecks, name: "GEO Recommendations", desc: "Prioritized fixes ranked by impact and difficulty.", tone: "amber" as const },
-  { icon: Sparkles, name: "AI Summary", desc: "'Your website reads like…' — the verdict an AI would give.", tone: "phosphor" as const },
+  { icon: Sparkles, name: "AI Summary", desc: "'Your website reads like…': the verdict an AI would give.", tone: "phosphor" as const },
 ];
 
 const STATS = [
   { k: "60%+", v: "of searches now end without a click" },
   { k: "4", v: "AI retrieval prompts simulated" },
   { k: "30+", v: "page-level signals scored" },
-  { k: "0", v: "AI black boxes — every score is explained" },
+  { k: "0", v: "black-box scores: each one shows its work" },
 ];
 
 export default function HomePage() {
   return (
     <div className="mx-auto max-w-7xl px-5">
       {/* HERO */}
-      <section className="grid gap-12 pb-16 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-24">
+      <section className="grid grid-cols-1 gap-12 pb-16 pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:pt-24">
         <div>
           <Badge tone="phosphor" className="mb-6">
             <span className="h-1.5 w-1.5 rounded-full bg-phosphor animate-pulse" />
@@ -106,7 +106,7 @@ export default function HomePage() {
         <Reveal>
           <span className="mono-label">{"// the engine"}</span>
           <h2 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-100">
-            Not a fake AI wrapper.
+            How it works
           </h2>
           <p className="mt-3 max-w-2xl text-muted">
             We crawl the real page, extract structured signals, build an entity graph, and simulate
@@ -135,7 +135,7 @@ export default function HomePage() {
       {/* CTA */}
       <section className="border-t border-ink-700/60 py-24">
         <Reveal>
-          <Panel grid className="relative overflow-hidden px-8 py-16 text-center">
+          <Panel grid className="relative overflow-hidden px-5 py-16 text-center sm:px-8">
             <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
             <div className="relative mx-auto max-w-xl">
               <h2 className="text-balance text-4xl font-semibold tracking-tight text-zinc-50">
@@ -153,11 +153,12 @@ export default function HomePage() {
       <footer className="no-print border-t border-ink-700/60 py-10">
         <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
           <span className="font-mono text-2xs text-muted">
-            LLM·Visibility·Lab — built for the post-search web.
+            LLM·Visibility·Lab. Built for the post-search web.
           </span>
           <div className="flex gap-4 font-mono text-2xs text-muted">
             <Link href="/analyze" className="hover:text-phosphor">Analyze</Link>
             <Link href="/compare" className="hover:text-phosphor">Compare</Link>
+            <Link href="/profile/demo" className="hover:text-phosphor">Profile</Link>
             <Link href="/settings" className="hover:text-phosphor">Settings</Link>
           </div>
         </div>
