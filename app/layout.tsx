@@ -20,13 +20,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LLM Visibility Lab — See what AI sees",
+  title: "LLM Visibility Lab: see what AI sees",
   description:
     "You optimize for Google. But can ChatGPT, Claude, and Perplexity discover, understand, cite, and recommend your website? LLM Visibility Lab analyzes your site and simulates AI retrieval.",
   keywords: ["GEO", "generative engine optimization", "AI SEO", "LLM visibility", "AI citations", "entity SEO"],
   authors: [{ name: "LLM Visibility Lab" }],
   openGraph: {
-    title: "LLM Visibility Lab — See what AI sees",
+    title: "LLM Visibility Lab: see what AI sees",
     description: "Analyze whether AI systems can discover, understand, cite, and recommend your website.",
     type: "website",
   },
