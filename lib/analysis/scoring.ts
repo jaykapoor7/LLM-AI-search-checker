@@ -10,7 +10,7 @@ import { clamp, toGrade } from "../utils";
 // ─────────────────────────────────────────────────────────────────────────────
 // Scoring philosophy
 // Each dimension is a weighted sum of observable signals. Every signal carries
-// its own weight so the report can *show its work* — no opaque numbers. Weights
+// its own weight so the report can *show its work*: no opaque numbers. Weights
 // were tuned against how retrieval-augmented LLMs actually select sources:
 // structured data, semantic clarity, entity grounding, and topical depth.
 // ─────────────────────────────────────────────────────────────────────────────
@@ -39,7 +39,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     status: c.title ? (c.title.length >= 15 && c.title.length <= 65 ? "pass" : "warn") : "fail",
     detail: c.title
       ? `"${truncate(c.title, 60)}" (${c.title.length} chars)`
-      : "No <title> found — AI crawlers lead with this.",
+      : "No <title> found. AI crawlers lead with this.",
   });
 
   signals.push({
@@ -49,7 +49,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     status: c.metaDescription ? (c.metaDescription.length >= 50 ? "pass" : "warn") : "fail",
     detail: c.metaDescription
       ? `${c.metaDescription.length} chars of summary text.`
-      : "Missing — models have no curated summary to lift.",
+      : "Missing. Models have no curated summary to lift.",
   });
 
   const h1 = c.headings.filter((h) => h.level === 1).length;
@@ -58,7 +58,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     label: "H1 structure",
     weight: 10,
     status: h1 === 1 ? "pass" : h1 === 0 ? "fail" : "warn",
-    detail: h1 === 1 ? "Exactly one H1 — clean topical anchor." : h1 === 0 ? "No H1 heading." : `${h1} H1s — ambiguous primary topic.`,
+    detail: h1 === 1 ? "Exactly one H1: a clean topical anchor." : h1 === 0 ? "No H1 heading." : `${h1} H1s: ambiguous primary topic.`,
   });
 
   const headingDepth = c.headings.length;
@@ -67,7 +67,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     label: "Heading hierarchy",
     weight: 9,
     status: headingDepth >= 5 ? "pass" : headingDepth >= 2 ? "warn" : "fail",
-    detail: `${headingDepth} headings — chunking surface for retrieval.`,
+    detail: `${headingDepth} headings: chunking surface for retrieval.`,
   });
 
   signals.push({
@@ -77,7 +77,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     status: c.jsonLd.length > 0 ? "pass" : "fail",
     detail: c.jsonLd.length
       ? `${c.jsonLd.length} schema block(s): ${[...new Set(c.jsonLd.map((j) => j.type))].join(", ")}`
-      : "No schema.org markup — the single biggest GEO miss.",
+      : "No schema.org markup: the single biggest GEO miss.",
   });
 
   signals.push({
@@ -85,7 +85,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     label: "Canonical URL",
     weight: 6,
     status: c.canonical ? "pass" : "warn",
-    detail: c.canonical ? "Canonical declared." : "No canonical — risks duplicate-content dilution.",
+    detail: c.canonical ? "Canonical declared." : "No canonical. Risks duplicate-content dilution.",
   });
 
   signals.push({
@@ -93,7 +93,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     label: "Open Graph metadata",
     weight: 8,
     status: Object.keys(c.ogTags).length >= 3 ? "pass" : Object.keys(c.ogTags).length ? "warn" : "fail",
-    detail: `${Object.keys(c.ogTags).length} OG tags — shapes link unfurls & social retrieval.`,
+    detail: `${Object.keys(c.ogTags).length} OG tags. These shape link unfurls & social retrieval.`,
   });
 
   signals.push({
@@ -111,7 +111,7 @@ export function scoreDiscoverability(c: CrawlResult): ScoreBlock {
     status: c.robotsMeta && /noindex/i.test(c.robotsMeta) ? "fail" : "pass",
     detail:
       c.robotsMeta && /noindex/i.test(c.robotsMeta)
-        ? "robots=noindex — actively blocks discovery!"
+        ? "robots=noindex actively blocks discovery."
         : "Page is indexable by crawlers.",
   });
 
@@ -166,7 +166,7 @@ export function scoreEntities(graph: EntityGraph, c: CrawlResult): ScoreBlock {
     status: schemaEntities >= 2 ? "pass" : schemaEntities === 1 ? "warn" : "fail",
     detail: schemaEntities
       ? `${schemaEntities} entities backed by machine-readable schema.`
-      : "Entities exist only in prose — no machine-readable grounding.",
+      : "Entities exist only in prose, with no machine-readable grounding.",
   });
 
   const strong = graph.entities.filter((e) => e.strength >= 0.6).length;
@@ -193,7 +193,7 @@ function covSignal(id: string, label: string, present: boolean, weight: number):
     label,
     weight,
     status: present ? "pass" : "fail",
-    detail: present ? "Detected and grounded." : "Not detected — AI can't attribute this to you.",
+    detail: present ? "Detected and grounded." : "Not detected. AI can't attribute this to you.",
   };
 }
 
@@ -234,7 +234,7 @@ export function scoreCitation(
     label: "Machine-verifiable facts",
     weight: 20,
     status: c.jsonLd.length >= 1 ? "pass" : "fail",
-    detail: c.jsonLd.length ? "Structured facts present — easy to cite with confidence." : "No structured facts to anchor a citation.",
+    detail: c.jsonLd.length ? "Structured facts present: easy to cite with confidence." : "No structured facts to anchor a citation.",
   });
 
   const externalLinks = c.links.filter((l) => !l.internal).length;
@@ -243,7 +243,7 @@ export function scoreCitation(
     label: "Outbound references",
     weight: 10,
     status: externalLinks >= 3 ? "pass" : externalLinks >= 1 ? "warn" : "fail",
-    detail: `${externalLinks} outbound links — situates you in a citation network.`,
+    detail: `${externalLinks} outbound links. These place you in a citation network.`,
   });
 
   factors.push({
@@ -268,7 +268,7 @@ export function scoreCitation(
 }
 
 function citationSummary(level: Confidence): string {
-  if (level === "High") return "An AI assistant could reference this site by name with low hallucination risk — you read as a citable source.";
+  if (level === "High") return "An AI assistant could reference this site by name with low hallucination risk. You read as a citable source.";
   if (level === "Medium") return "An AI might mention you when directly relevant, but will often paraphrase generically rather than cite you outright.";
   return "Unlikely to be cited. Models will answer from better-grounded sources and leave you out of the conversation.";
 }

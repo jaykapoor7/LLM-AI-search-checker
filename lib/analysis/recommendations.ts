@@ -27,7 +27,7 @@ export function buildRecommendations(
       id: "add-schema",
       title: "Add schema.org structured data",
       rationale:
-        "You have zero JSON-LD. Adding Organization, Person, and Product/Article schema is the single highest-leverage change — it gives AI machine-readable facts to cite instead of guessing.",
+        "You have zero JSON-LD. Adding Organization, Person, and Product/Article schema is the single highest-impact change: it gives AI machine-readable facts to cite instead of guessing.",
       priority: "P0",
       impact: "High",
       difficulty: "Easy",
@@ -78,7 +78,7 @@ export function buildRecommendations(
     recs.push({
       id: "topical-depth",
       title: "Increase topical depth",
-      rationale: `Only ${c.wordCount} words of crawlable content. Models cite substance — expand core pages to 600+ words of specific, non-generic copy that answers real questions.`,
+      rationale: `Only ${c.wordCount} words of crawlable content. Models cite substance. Expand core pages to 600+ words of specific, non-generic copy that answers real questions.`,
       priority: "P1",
       impact: "Medium",
       difficulty: "Moderate",
@@ -91,7 +91,7 @@ export function buildRecommendations(
       id: "meta-description",
       title: "Write a substantive meta description",
       rationale:
-        "Your meta description is missing or too short. It's the summary models lift first — write 140–160 chars that state who you are, what you do, and for whom.",
+        "Your meta description is missing or too short. It's the summary models lift first. Write 140–160 chars that state who you are, what you do, and for whom.",
       priority: "P2",
       impact: "Medium",
       difficulty: "Easy",
@@ -106,7 +106,7 @@ export function buildRecommendations(
     recs.push({
       id: "reduce-generic",
       title: "Replace generic marketing copy",
-      rationale: `${genericCount} passage(s) use filler language ("seamless", "cutting-edge"). Generic copy carries no retrievable information — replace with concrete facts, numbers, and specifics.`,
+      rationale: `${genericCount} passage(s) use filler language ("seamless", "cutting-edge"). Generic copy carries no retrievable information. Replace it with concrete facts, numbers, and specifics.`,
       priority: "P2",
       impact: "Medium",
       difficulty: "Easy",
